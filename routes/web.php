@@ -1,6 +1,12 @@
 <?php
 
+use App\Http\Controllers\BackendController;
+use App\Http\Controllers\FrontendController;
+use App\Http\Controllers\InfoController;
+use App\Http\Controllers\PartenariatController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\SavController;
+use App\Http\Controllers\WelcomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -13,39 +19,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/welcome', function () {
-    return view('welcome');
-})->name('accueil');
+Route::get('/welcome', [WelcomeController::class, 'index'])->name('accueil');
 
-Route::get('/info', function () {
-    return view('infos/contact/info');
-})->name('info');
+Route::get('/info', [InfoController::class, 'index'])->name('info');
 
-Route::get('/partenariat', function () {
-    return view('infos/contact/partenariat');
-})->name('partenariat');
+Route::get('/partenariat', [PartenariatController::class, 'index'])->name('partenariat');
 
-Route::get('/sav', function () {
-    return view('infos/contact/sav');
-})->name('sav');
+Route::get('/sav', [SavController::class, 'index'])->name('sav');
 
-Route::get('/backend', function () {
-    $backTab = [
-        (object)["nom"=>"Seif", "fonction"=>"backend", "src"=>"test.jpg"],
-        (object)["nom"=>"Elvis", "fonction"=>"backend", "src"=>"test.jpg"],
-        (object)["nom"=>"Kevin", "fonction"=>"backend", "src"=>"test.jpg"],
-        (object)["nom"=>"ali", "fonction"=>"backend", "src"=>"test.jpg"], 
-    ];
-    return view('team/web/backend', compact('backTab'));
-})->name('backend');
+Route::get('/backend', [BackendController:: class, 'index'])->name('backend');
 
-Route::get('/frontend', function () {
-    $frontTab = [
-        (object)["nom"=>"chris", "fonction"=>"frontend", "src"=>"test.jpg"],
-        (object)["nom"=>"alan", "fonction"=>"frontend", "src"=>"test.jpg"],
-        (object)["nom"=>"arnaud", "fonction"=>"frontend", "src"=>"test.jpg"],
-        (object)["nom"=>"gilles", "fonction"=>"frontend", "src"=>"test.jpg"], 
-        (object)["nom"=>"lio", "fonction"=>"frontend", "src"=>"test.jpg"]
-    ];
-    return view('team/web/frontend', compact('frontTab'));
-})->name('frontend');
+Route::get('/frontend', [FrontendController::class, 'index'])->name('frontend');
